@@ -5,10 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Finder</title>
     <script type="module" src="./src/script.js" defer></script>
+    <link rel="stylesheet" href="./src/styles/style.css" />
   </head>
   <body>
-    <header></header>
-    <main></main>
+    <header>
+      <h1>MovieFinder</h1>
+    </header>
+    <main>
+      <section>
+        <div></div>
+        <div>
+          <input type="text" name="search" id="search" />
+          <button id="search-btn">
+            <img src="./src/assets/images/search.svg" alt="search icon" />Search
+          </button>
+        </div>
+      </section>
+      <section id="favourites-holder"></section>
+      <section id="popular-holder"></section>
+      <section id="looked-up-holder"></section>
+    </main>
     <footer></footer>
   </body>
 </html>

@@ -1,3 +1,10 @@
-import API from "./Api.js";
+import { searchMovie } from "./Api.js";
 
-console.log(API);
+const btn = document.getElementById("search-btn");
+const searchInput = document.getElementById("search");
+
+const handleSearch = () => {
+  searchMovie(searchInput.value);
+};
+
+btn.addEventListener("click", handleSearch);

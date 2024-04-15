@@ -1,9 +1,5 @@
-// import dotenv from "dotenv";
-// dotenv.config();
-import { createCards } from "./Card.js";
+import createCards from "./Cards.js";
 const API_KEY = "87e385fc6f59005274b365c73a2eac08";
-
-// export default API_KEY;
 
 const options = {
   method: "GET",
@@ -46,4 +42,21 @@ export const searchMovie = async (input) => {
       return response;
     })
     .catch((err) => console.error(err));
+};
+
+export const getInfoAboutMovie = async (movie_id) => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movie_id}`,
+      options
+    );
+    if (!response.ok) {
+      throw new Error(`Error with status code  ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw new Error(err);
+  }
 };

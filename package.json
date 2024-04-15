@@ -1,5 +1,11 @@
 {
   "dependencies": {
     "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "esm": "^3.2.25"
+  },
+  "scripts": {
+    "start": "node -r esm your-script.js"
   }
 }

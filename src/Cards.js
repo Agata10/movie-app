@@ -2,7 +2,7 @@ import { getGenreList } from "./Api.js";
 
 const img_URL = "https://image.tmdb.org/t/p/w500";
 
-export const createCards = async (array) => {
+const createCards = async (array) => {
   const divHolder = document.getElementById("looked-up-holder");
   const arrayOfGenres = await getGenreList();
   array.forEach((result) => {
@@ -28,3 +28,5 @@ export const createCards = async (array) => {
     });
   });
 };
+
+export default createCards;

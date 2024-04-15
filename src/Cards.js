@@ -8,6 +8,7 @@ const createCards = async (array) => {
   array.forEach((result) => {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.setAttribute("id", `_${result.id}`);
     const listOfMovies = arrayOfGenres.genres
       .filter((item) => result.genre_ids.includes(item.id))
       .map((item) => item.name);

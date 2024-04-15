@@ -24,13 +24,13 @@ main {
 #looked-up-holder {
     display: flex;
     flex-wrap: wrap;
-    width: 80%;
-    gap: 10px;
-    justify-content: space-around;
+    width: 90%;
+    gap: 40px;
+    justify-content: center;
 }
 
 .card {
-    width: 300px;
+    width: 250px;
     height: 460px;
     display: flex;
     flex-direction: column;

@@ -2,9 +2,7 @@ import { getGenreList } from "./Api.js";
 
 const img_URL = "https://image.tmdb.org/t/p/w500";
 
-export const createCards = async (array) => {
-  const divHolder = document.getElementById("looked-up-holder");
-
+export const createCards = async (array, divHolder) => {
   array.forEach((result) => {
     const card = document.createElement("div");
     card.classList.add("card");

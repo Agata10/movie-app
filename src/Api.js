@@ -26,21 +26,19 @@ export const getGenreList = async () => {
 };
 
 export const searchMovies = async (input) => {
-  await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${input}&page=1`,
-    options
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Error with status code  ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((response) => {
-      createCards(response.results);
-      return response;
-    })
-    .catch((err) => console.error(err));
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${input}&page=1`,
+      options
+    );
+    if (!response.ok) {
+      throw new Error(`Error with status code  ${response.status}`);
+    }
+    const movies = await response.json();
+    return movies.results;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const getInfoAboutMovie = async (movie_id) => {

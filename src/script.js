@@ -1,4 +1,5 @@
 import { searchMovies, getTokenForSession } from "./Api.js";
+import { createCards } from "./Cards.js";
 import showMovieInfo from "./MovieInfo.js";
 
 const btn = document.getElementById("search-btn");
@@ -12,8 +13,9 @@ async function onLoad() {
   }
 }
 
-const handleSearch = () => {
-  searchMovies(searchInput.value);
+const handleSearch = async () => {
+  const movies = await searchMovies(searchInput.value);
+  createCards(movies, document.getElementById("looked-up-holder"));
 };
 
 btn.addEventListener("click", handleSearch);

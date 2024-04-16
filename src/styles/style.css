@@ -50,3 +50,13 @@ main {
     justify-content: space-between;
     padding: 4px 0;
 }
+
+/* DIALOG */
+dialog {
+    width: 80%;
+    min-height: 600px;
+}
+
+dialog img {
+    width: 400px;
+}

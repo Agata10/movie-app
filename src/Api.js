@@ -1,4 +1,4 @@
-import createCards from "./Cards.js";
+import { createCards } from "./Cards.js";
 const API_KEY = "87e385fc6f59005274b365c73a2eac08";
 
 const options = {
@@ -26,7 +26,7 @@ export const getGenreList = async () => {
   }
 };
 
-export const searchMovie = async (input) => {
+export const searchMovies = async (input) => {
   await fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${input}&page=1`,
     options
@@ -47,13 +47,31 @@ export const searchMovie = async (input) => {
 export const getInfoAboutMovie = async (movie_id) => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movie_id}`,
+      `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}`,
       options
     );
     if (!response.ok) {
       throw new Error(`Error with status code  ${response.status}`);
     }
     const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw new Error(err);
+  }
+};
+
+export const getMovieCast = async (movie_id) => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${API_KEY}`,
+      options
+    );
+    if (!response.ok) {
+      throw new Error(`Error with status code  ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.error(err);

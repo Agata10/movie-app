@@ -22,7 +22,6 @@ export const getGenreList = async () => {
     return data;
   } catch (err) {
     console.error(err);
-    throw new Error(err);
   }
 };
 
@@ -57,7 +56,6 @@ export const getInfoAboutMovie = async (movie_id) => {
     return data;
   } catch (err) {
     console.error(err);
-    throw new Error(err);
   }
 };
 
@@ -71,10 +69,115 @@ export const getMovieCast = async (movie_id) => {
       throw new Error(`Error with status code  ${response.status}`);
     }
     const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const addToFavourite = async (movie_id) => {
+  try {
+    console.log(movie_id);
+    const session = await exchangeTokenForSessionId(
+      localStorage.getItem("token")
+    );
+    const response = await fetch(
+      `
+      https://api.themoviedb.org/3/account/21215550/favorite?api_key=${API_KEY}&session_id=${session}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          media_type: "movie",
+          media_id: movie_id,
+          favorite: true,
+        }),
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Error with status code  ${response.status}`);
+    }
+    const data = await response.json();
+    // if (data.success === true) {
+    // }
     console.log(data);
     return data;
   } catch (err) {
     console.error(err);
-    throw new Error(err);
   }
+};
+
+export const getTokenForSession = async () => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/authentication/token/new?api_key=87e385fc6f59005274b365c73a2eac08`,
+        {
+          method: "GET",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error with status code  ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data.request_token);
+      window.open(
+        `https://www.themoviedb.org/authenticate/${data.request_token}`
+      );
+      localStorage.setItem("token", data.request_token);
+      return data.request_token;
+    } catch (err) {
+      console.error(err);
+    }
+  } else {
+    return token;
+  }
+};
+
+export const exchangeTokenForSessionId = async (requestToken) => {
+  try {
+    console.log("started");
+    const tokenAuth = localStorage.getItem("authToken");
+    if (!tokenAuth) {
+      console.log(requestToken);
+      const body = { request_token: `${requestToken}` };
+      const response = await fetch(
+        `https://api.themoviedb.org/3/authentication/session/new?api_key=87e385fc6f59005274b365c73a2eac08`,
+        {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`Error with status code  ${response.status}`);
+      }
+      const sessionID = await response.json();
+      localStorage.setItem("authToken", sessionID.session_id);
+      return sessionID.session_id;
+    } else {
+      return tokenAuth;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getFavouritesMovies = async () => {
+  await fetch(
+    "https://api.themoviedb.org/3/account/21215550/favorite/movies?language=en-US&page=1&sort_by=created_at.asc",
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+    .catch((err) => console.error(err));
 };

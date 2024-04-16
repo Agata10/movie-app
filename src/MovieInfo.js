@@ -1,5 +1,4 @@
-import { getInfoAboutMovie } from "./Api.js";
-
+import { getInfoAboutMovie, addToFavourite } from "./Api.js";
 const img_URL = "https://image.tmdb.org/t/p/w500";
 
 const showMovieInfo = async (e) => {
@@ -12,6 +11,7 @@ const showMovieInfo = async (e) => {
   const country = document.getElementById("country");
   const duration = document.getElementById("duration");
   const img = dialog.querySelector("img");
+  const addFavBtn = document.getElementById("add-fav-btn");
 
   const card = e.target.closest(".card");
   const closeBtn = document.getElementById("close");
@@ -49,6 +49,12 @@ const showMovieInfo = async (e) => {
     closeBtn.addEventListener("click", () => {
       dialog.close();
       document.querySelector("main").style.filter = "blur(0px)";
+      opened = false;
+    });
+
+    addFavBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      addToFavourite(card.id.slice(1));
     });
   }
 };

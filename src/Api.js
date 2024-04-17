@@ -36,6 +36,9 @@ export const searchMovies = async (input) => {
       throw new Error(`Error with status code  ${response.status}`);
     }
     const movies = await response.json();
+    if (movies.results.length == 0) {
+      alert("No movies found");
+    }
     return movies.results;
   } catch (err) {
     console.error(err);

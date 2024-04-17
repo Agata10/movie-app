@@ -1,9 +1,15 @@
 import { getGenreList } from "./Api.js";
+import { searchClicked } from "./script.js";
 
 const img_URL = "https://image.tmdb.org/t/p/w500";
 
 export const createCards = async (array, divHolder) => {
   if (divHolder.id === "favourites") {
+    while (divHolder.firstChild) {
+      divHolder.removeChild(divHolder.firstChild);
+    }
+  }
+  if (divHolder.id === "looked-up-holder") {
     while (divHolder.firstChild) {
       divHolder.removeChild(divHolder.firstChild);
     }
@@ -23,7 +29,7 @@ export const createCards = async (array, divHolder) => {
     <img src="${url}" alt="poster" id='img-holder'>
     <div>
     <h3>${result.title}</h3>
-    <div>${result.vote_average}</div>
+    <div>${result.vote_average.toFixed(2)}</div>
     </div>`;
     appendGenres(result, card);
     divHolder.appendChild(card);

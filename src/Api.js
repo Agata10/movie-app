@@ -73,12 +73,9 @@ export const getMovieCast = async (movie_id) => {
   }
 };
 
-export const addToFavourite = async (movie_id) => {
+export const addToFavourite = async (movie_id, session) => {
   try {
-    console.log(movie_id);
-    const session = await exchangeTokenForSessionId(
-      localStorage.getItem("token")
-    );
+    // const session = await exchangeTokenForSessionId(token);
     const response = await fetch(
       `
       https://api.themoviedb.org/3/account/21215550/favorite?api_key=${API_KEY}&session_id=${session}`,
@@ -99,8 +96,6 @@ export const addToFavourite = async (movie_id) => {
       throw new Error(`Error with status code  ${response.status}`);
     }
     const data = await response.json();
-    // if (data.success === true) {
-    // }
     console.log(data);
     return data;
   } catch (err) {
@@ -140,10 +135,8 @@ export const getTokenForSession = async () => {
 
 export const exchangeTokenForSessionId = async (requestToken) => {
   try {
-    console.log("started");
     const tokenAuth = localStorage.getItem("authToken");
     if (!tokenAuth) {
-      console.log(requestToken);
       const body = { request_token: `${requestToken}` };
       const response = await fetch(
         `https://api.themoviedb.org/3/authentication/session/new?api_key=87e385fc6f59005274b365c73a2eac08`,

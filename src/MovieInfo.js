@@ -4,6 +4,7 @@ import {
   getFavouritesMovies,
 } from "./Api.js";
 import { createCards } from "./Cards.js";
+import { session } from "./script.js";
 const img_URL = "https://image.tmdb.org/t/p/w500";
 
 export const showFavMovies = async () => {
@@ -69,7 +70,7 @@ const showMovieInfo = async (e) => {
 
     addFavBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      addToFavourite(card.id.slice(1));
+      addToFavourite(card.id.slice(1), session);
       showFavMovies();
     });
   }

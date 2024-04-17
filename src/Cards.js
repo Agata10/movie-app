@@ -7,8 +7,15 @@ export const createCards = async (array, divHolder) => {
     const card = document.createElement("div");
     card.classList.add("card");
     card.setAttribute("id", `_${result.id}`);
+    let url;
+    if (result.poster_path === null) {
+      url = "../src/assets/images/no-pic.png";
+      //card.querySelector("img").style.width = "150px";
+    } else {
+      url = `${img_URL}${result.poster_path}`;
+    }
     card.innerHTML = `
-    <img src="${img_URL}${result.poster_path}" alt="poster">
+    <img src="${url}" alt="poster" id='img-holder'>
     <div>
     <h3>${result.title}</h3>
     <div>${result.vote_average}</div>
@@ -25,10 +32,11 @@ export const appendGenres = async (resultArr, parent) => {
     .map((item) => item.name);
   const p = document.createElement("p");
   listOfMovies.forEach((genre, index) => {
-    if (index == arrayOfGenres.length - 1) {
+    if (index == listOfMovies.length - 1) {
       p.textContent += `${genre}`;
+    } else {
+      p.textContent += `${genre}, `;
     }
-    p.textContent += `${genre}, `;
     parent.appendChild(p);
   });
 };

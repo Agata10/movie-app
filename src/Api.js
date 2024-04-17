@@ -171,11 +171,19 @@ export const exchangeTokenForSessionId = async (requestToken) => {
 };
 
 export const getFavouritesMovies = async () => {
-  await fetch(
-    "https://api.themoviedb.org/3/account/21215550/favorite/movies?language=en-US&page=1&sort_by=created_at.asc",
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err));
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/account/21215550/favorite/movies?api_key=${API_KEY}&page=1&sort_by=created_at.asc&session_id=${localStorage.getItem(
+        "authToken"
+      )}`,
+      options
+    );
+    if (!response.ok) {
+      throw new Error(`Error with status code  ${response.status}`);
+    }
+    const favs = await response.json();
+    return favs.results;
+  } catch (err) {
+    console.error(err);
+  }
 };

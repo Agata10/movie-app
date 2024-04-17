@@ -1,5 +1,21 @@
-import { getInfoAboutMovie, addToFavourite } from "./Api.js";
+import {
+  getInfoAboutMovie,
+  addToFavourite,
+  getFavouritesMovies,
+} from "./Api.js";
+import { createCards } from "./Cards.js";
 const img_URL = "https://image.tmdb.org/t/p/w500";
+
+export const showFavMovies = async () => {
+  const favMovies = await getFavouritesMovies();
+  if (favMovies) {
+    console.log(favMovies);
+    document.getElementById("favourites-holder").style.display = "flex";
+    createCards(favMovies, document.getElementById("favourites"));
+  } else {
+    document.getElementById("favourites-holder").style.display = "none";
+  }
+};
 
 const showMovieInfo = async (e) => {
   const dialog = document.querySelector("dialog");
@@ -49,12 +65,12 @@ const showMovieInfo = async (e) => {
     closeBtn.addEventListener("click", () => {
       dialog.close();
       document.querySelector("main").style.filter = "blur(0px)";
-      opened = false;
     });
 
     addFavBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       addToFavourite(card.id.slice(1));
+      showFavMovies();
     });
   }
 };

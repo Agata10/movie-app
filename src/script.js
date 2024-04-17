@@ -1,6 +1,6 @@
 import { searchMovies, getTokenForSession } from "./Api.js";
 import { createCards } from "./Cards.js";
-import showMovieInfo from "./MovieInfo.js";
+import showMovieInfo, { showFavMovies } from "./MovieInfo.js";
 
 const btn = document.getElementById("search-btn");
 const searchInput = document.getElementById("search");
@@ -21,3 +21,4 @@ const handleSearch = async () => {
 btn.addEventListener("click", handleSearch);
 divWithCards.addEventListener("click", showMovieInfo, false);
 onLoad();
+showFavMovies();

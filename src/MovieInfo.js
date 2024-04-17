@@ -5,15 +5,19 @@ import {
 } from "./Api.js";
 import { createCards } from "./Cards.js";
 const img_URL = "https://image.tmdb.org/t/p/w500";
+let card;
+const addFavBtn = document.getElementById("add-fav-btn");
 
 export const showFavMovies = async () => {
-  const favMovies = await getFavouritesMovies();
-  if (favMovies) {
-    console.log(favMovies);
-    document.getElementById("favourites-holder").style.display = "flex";
-    createCards(favMovies, document.getElementById("favourites"));
-  } else {
-    document.getElementById("favourites-holder").style.display = "none";
+  if (localStorage.getItem("authToken")) {
+    const favMovies = await getFavouritesMovies();
+    if (favMovies) {
+      console.log(favMovies);
+      document.getElementById("favourites-holder").style.display = "flex";
+      createCards(favMovies, document.getElementById("favourites"));
+    } else {
+      document.getElementById("favourites-holder").style.display = "none";
+    }
   }
 };
 
@@ -27,9 +31,8 @@ const showMovieInfo = async (e) => {
   const country = document.getElementById("country");
   const duration = document.getElementById("duration");
   const img = dialog.querySelector("img");
-  const addFavBtn = document.getElementById("add-fav-btn");
 
-  const card = e.target.closest(".card");
+  card = e.target.closest(".card");
   const closeBtn = document.getElementById("close");
   if (card) {
     const info = await getInfoAboutMovie(card.id.slice(1));
@@ -65,15 +68,16 @@ const showMovieInfo = async (e) => {
     closeBtn.addEventListener("click", () => {
       dialog.close();
       document.querySelector("main").style.filter = "blur(0px)";
-      showFavMovies();
-    });
-
-    addFavBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      addToFavourite(card.id.slice(1));
-      showFavMovies();
+      //showFavMovies();
     });
   }
 };
+
+addFavBtn.addEventListener("click", async (e) => {
+  console.log(card.id);
+  e.stopPropagation();
+  await addToFavourite(card.id.slice(1));
+  await showFavMovies();
+});
 
 export default showMovieInfo;

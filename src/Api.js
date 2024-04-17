@@ -74,7 +74,7 @@ export const getMovieCast = async (movie_id) => {
   }
 };
 
-const deleteFavMovie = async (movie_id, favMovies) => {
+const deleteFavMovie = async (movie_id) => {
   try {
     const response = await fetch(
       `https://api.themoviedb.org/3/account/21215550/favorite?api_key=${API_KEY}&session_id=${localStorage.getItem(
@@ -107,11 +107,14 @@ export const addToFavourite = async (movie_id) => {
   try {
     // const session = await exchangeTokenForSessionId(token);
     const favMovies = await getFavouritesMovies();
-    if (favMovies) {
-      const ismovie = favMovies.filter((item) => item.id == movie_id);
-      if (ismovie) {
-        await deleteFavMovie(movie_id, favMovies);
-      }
+    const ismovie = favMovies.find((item) => {
+      if (item.id == movie_id) return true;
+    });
+    if (ismovie) {
+      console.log(movie_id);
+      console.log(ismovie);
+      const del = await deleteFavMovie(movie_id);
+      return del;
     } else {
       const response = await fetch(
         `https://api.themoviedb.org/3/account/21215550/favorite?api_key=${API_KEY}&session_id=${localStorage.getItem(
@@ -134,7 +137,6 @@ export const addToFavourite = async (movie_id) => {
         throw new Error(`Error with status code ${response.status}`);
       }
       const data = await response.json();
-      console.log(data);
       return data;
     }
   } catch (err) {
@@ -144,7 +146,6 @@ export const addToFavourite = async (movie_id) => {
 
 export const getTokenForSession = async () => {
   const token = localStorage.getItem("token");
-
   if (!token) {
     try {
       const response = await fetch(

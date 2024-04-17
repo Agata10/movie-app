@@ -10,11 +10,12 @@ const btn = document.getElementById("search-btn");
 const searchInput = document.getElementById("search");
 const divWithCards = document.getElementById("looked-up-holder");
 const divWithFavs = document.getElementById("favourites");
+let token;
 
 async function onLoad() {
   const getToken = localStorage.getItem("token");
   if (!getToken) {
-    const token = await getTokenForSession();
+    token = await getTokenForSession();
   }
 }
 

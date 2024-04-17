@@ -56,6 +56,14 @@ main {
     cursor: pointer;
 }
 
+#favourites .card:hover {
+    transform: translateY(-30px);
+}
+
+#looked-up-holder .card:hover {
+    transform: scale(1.05);
+}
+
 .card img {
     width: 250px;
     height: 380px;

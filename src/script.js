@@ -11,7 +11,6 @@ const searchInput = document.getElementById("search");
 const divWithCards = document.getElementById("looked-up-holder");
 const divWithFavs = document.getElementById("favourites");
 let token;
-let searchClicked = false;
 
 async function onLoad() {
   const getToken = localStorage.getItem("token");
@@ -21,11 +20,8 @@ async function onLoad() {
 }
 
 const handleSearch = async () => {
-  searchClicked = true;
   const movies = await searchMovies(searchInput.value);
   await createCards(movies, document.getElementById("looked-up-holder"));
-  searchInput.value = "";
-  searchClicked = false;
 };
 
 onLoad();
@@ -43,5 +39,3 @@ searchInput.addEventListener("input", async (e) => {
 btn.addEventListener("click", handleSearch);
 divWithCards.addEventListener("click", showMovieInfo);
 divWithFavs.addEventListener("click", showMovieInfo);
-
-export { searchClicked };

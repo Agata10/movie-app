@@ -47,6 +47,9 @@ export const searchMovies = async (input) => {
 
 export const getInfoAboutMovie = async (movie_id) => {
   try {
+    setTimeout(() => {
+      document.body.style.cursor = "progress";
+    }, 1);
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}`,
       options
@@ -56,6 +59,10 @@ export const getInfoAboutMovie = async (movie_id) => {
     }
     const data = await response.json();
     console.log(data);
+    setTimeout(() => {
+      document.body.style.cursor = "default";
+    }, 100);
+
     return data;
   } catch (err) {
     console.error(err);

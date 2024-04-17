@@ -1,5 +1,4 @@
 import { getGenreList } from "./Api.js";
-import { searchClicked } from "./script.js";
 
 const img_URL = "https://image.tmdb.org/t/p/w500";
 

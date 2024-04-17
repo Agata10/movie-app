@@ -63,7 +63,6 @@ const showMovieInfo = async (e) => {
         country.textContent = `${c}, `;
       }
     });
-
     closeBtn.addEventListener("click", () => {
       dialog.close();
       document.querySelector("main").style.filter = "blur(0px)";

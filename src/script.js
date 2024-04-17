@@ -35,6 +35,13 @@ searchInput.addEventListener("input", async (e) => {
     }
   }
 });
+//handle enter
+searchInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    btn.focus();
+    btn.click();
+  }
+});
 
 btn.addEventListener("click", handleSearch);
 divWithCards.addEventListener("click", showMovieInfo);

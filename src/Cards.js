@@ -30,10 +30,10 @@ export const createCards = async (array, divHolder) => {
   });
 };
 
-export const appendGenres = async (resultArr, parent) => {
+export const appendGenres = async (resultObj, parent) => {
   const arrayOfGenres = await getGenreList();
   const listOfMovies = arrayOfGenres.genres
-    .filter((item) => resultArr.genre_ids.includes(item.id))
+    .filter((item) => resultObj.genre_ids.includes(item.id))
     .map((item) => item.name);
   const p = document.createElement("p");
   listOfMovies.forEach((genre, index) => {

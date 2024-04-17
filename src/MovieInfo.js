@@ -12,7 +12,6 @@ export const showFavMovies = async () => {
   if (localStorage.getItem("authToken")) {
     const favMovies = await getFavouritesMovies();
     if (favMovies) {
-      console.log(favMovies);
       document.getElementById("favourites-holder").style.display = "flex";
       createCards(favMovies, document.getElementById("favourites"));
     } else {
@@ -45,10 +44,10 @@ const showMovieInfo = async (e) => {
     description.textContent = info.overview;
     const genresInfo = info.genres.map((item) => item.name);
     genresInfo.forEach((g, index) => {
-      if (index === genresInfo.length - 1) {
-        genres.textContent = `${g}`;
+      if (index == genresInfo.length - 1) {
+        genres.textContent += `${g}`;
       } else {
-        genres.textContent = `${g}, `;
+        genres.textContent += `${g}, `;
       }
     });
     date.textContent = info.release_date;

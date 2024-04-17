@@ -52,6 +52,7 @@ export const getInfoAboutMovie = async (movie_id) => {
       throw new Error(`Error with status code  ${response.status}`);
     }
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.error(err);

@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+:root {
+    --caveat-logo: "Caveat", cursive;
+
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +19,9 @@ body {
 
 header {
     display: flex;
+    padding-left: 200px;
+    font-family: var(--caveat-logo);
+    font-size: 2rem;
 }
 
 main {
@@ -19,6 +29,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 100vw;
+    min-height: 100vh;
 }
 
 #looked-up-holder {
@@ -94,4 +105,26 @@ dialog img {
 #favourites .card img {
     width: 200px;
     height: 300px;
+}
+
+#favourites .card h3,
+#favourites .card p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#favourites .card h3 {
+    max-width: 130px;
+}
+
+#favourites .card p {
+    max-width: 85%;
+}
+
+#favourites .card h3:hover,
+#favourites .card p:hover {
+    text-overflow: initial;
+    overflow: visible;
+    white-space: wrap;
 }

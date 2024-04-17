@@ -3,6 +3,11 @@ import { getGenreList } from "./Api.js";
 const img_URL = "https://image.tmdb.org/t/p/w500";
 
 export const createCards = async (array, divHolder) => {
+  if (divHolder.id === "favourites") {
+    while (divHolder.firstChild) {
+      divHolder.removeChild(divHolder.firstChild);
+    }
+  }
   array.forEach((result) => {
     const card = document.createElement("div");
     card.classList.add("card");

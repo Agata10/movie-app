@@ -1,4 +1,5 @@
 import { createCards } from "./Cards.js";
+import { showFavMovies } from "./MovieInfo.js";
 const API_KEY = "87e385fc6f59005274b365c73a2eac08";
 
 const options = {
@@ -73,12 +74,12 @@ export const getMovieCast = async (movie_id) => {
   }
 };
 
-export const addToFavourite = async (movie_id, session) => {
+const deleteFavMovie = async (movie_id, favMovies) => {
   try {
-    // const session = await exchangeTokenForSessionId(token);
     const response = await fetch(
-      `
-      https://api.themoviedb.org/3/account/21215550/favorite?api_key=${API_KEY}&session_id=${session}`,
+      `https://api.themoviedb.org/3/account/21215550/favorite?api_key=${API_KEY}&session_id=${localStorage.getItem(
+        "authToken"
+      )}`,
       {
         method: "POST",
         headers: {
@@ -88,7 +89,7 @@ export const addToFavourite = async (movie_id, session) => {
         body: JSON.stringify({
           media_type: "movie",
           media_id: movie_id,
-          favorite: true,
+          favorite: false,
         }),
       }
     );
@@ -96,8 +97,46 @@ export const addToFavourite = async (movie_id, session) => {
       throw new Error(`Error with status code  ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
     return data;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const addToFavourite = async (movie_id) => {
+  try {
+    // const session = await exchangeTokenForSessionId(token);
+    const favMovies = await getFavouritesMovies();
+    if (favMovies) {
+      const ismovie = favMovies.filter((item) => item.id == movie_id);
+      if (ismovie) {
+        await deleteFavMovie(movie_id, favMovies);
+      }
+    } else {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/account/21215550/favorite?api_key=${API_KEY}&session_id=${localStorage.getItem(
+          "authToken"
+        )}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            media_type: "movie",
+            media_id: movie_id,
+            favorite: true,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`Error with status code ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data);
+      return data;
+    }
   } catch (err) {
     console.error(err);
   }
@@ -119,7 +158,6 @@ export const getTokenForSession = async () => {
         throw new Error(`Error with status code  ${response.status}`);
       }
       const data = await response.json();
-      console.log(data.request_token);
       window.open(
         `https://www.themoviedb.org/authenticate/${data.request_token}`
       );

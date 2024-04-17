@@ -10,13 +10,11 @@ const btn = document.getElementById("search-btn");
 const searchInput = document.getElementById("search");
 const divWithCards = document.getElementById("looked-up-holder");
 const divWithFavs = document.getElementById("favourites");
-let token;
-let session;
 
 async function onLoad() {
   const getToken = localStorage.getItem("token");
   if (!getToken) {
-    token = await getTokenForSession();
+    const token = await getTokenForSession();
   }
 }
 
@@ -29,7 +27,7 @@ onLoad();
 showFavMovies();
 //remove search cards when user delete input
 searchInput.addEventListener("input", async (e) => {
-  session = await exchangeTokenForSessionId(token);
+  await exchangeTokenForSessionId(token);
   if (e.target.value === "") {
     while (divWithCards.firstChild) {
       divWithCards.removeChild(divWithCards.firstChild);
@@ -40,5 +38,3 @@ searchInput.addEventListener("input", async (e) => {
 btn.addEventListener("click", handleSearch);
 divWithCards.addEventListener("click", showMovieInfo);
 divWithFavs.addEventListener("click", showMovieInfo);
-
-export { session };

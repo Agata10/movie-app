@@ -22,6 +22,9 @@ body {
 }
 
 header {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
     display: flex;
     align-items: center;
     padding: 0 0 20px 200px;
@@ -51,30 +54,67 @@ main {
 /* SEARCH HOLDER */
 
 #search-holder {
-    height: 60px;
+    height: 80px;
     width: 50%;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    margin-bottom: 80px;
 }
 
 #search-holder input {
     width: 70%;
-    background-color: rgb(0, 0, 0, 0.7);
+    background-color: rgb(0, 0, 0, 0.4);
     border-bottom: none;
+    padding: 5px;
+    padding-left: 10px;
+    border: none;
+    border-bottom: 1px solid #ffd60a;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 12px;
+    color: whitesmoke;
+    font-family: var(--paragrapghs);
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+#search-holder input:focus {
+    appearance: none;
+    background-color: rgb(0, 0, 0, 0.5);
+    outline: none;
+    border-bottom: 2px solid whitesmoke;
+    outline-width: 1px;
+}
+
+#search-holder input:hover {
+    background-color: rgb(0, 0, 0, 0.8);
+}
+
+#search-holder button:hover {
+    transform: scale(1.1);
+}
+
+#search-holder button {
+    position: relative;
+    top: 0px;
+    right: 30px;
+    border: 2px solid #ffd60a;
+    background-color: rgb(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
 }
 
 #search-holder input::placeholder {
-    content: "Search movie by title..";
     color: whitesmoke;
     font-family: var(--paragrapghs);
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: 300;
 }
 
 .search-img-wrapper {
     height: 400px;
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,7 +131,7 @@ main {
 
 .card {
     width: 250px;
-    height: 500px;
+    height: 520px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,23 +161,34 @@ main {
 .card>div {
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
     padding-top: 10px;
-    width: 100%;
+    width: 90%;
 }
 
 .card h3 {
-    white-space: wrap;
-    max-width: 165px;
     font-family: var(--headers);
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    max-width: 160px;
+}
+
+.card h3+div {
+    font-family: var(--paragrapghs);
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.card h3+div::before {
+    content: url('../assets/images/star-fill.svg');
+    padding-right: 4px;
+    position: relative;
+    top: 2px;
 }
 
 .card p {
     margin-top: auto;
-    padding-bottom: 10px;
-    max-width: 95%;
+    padding-bottom: 20px;
+    max-width: 85%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -174,7 +225,7 @@ dialog img {
 #favourites-holder>h3 {
     font-family: var(--headers);
     font-size: 2rem;
-    padding: 30px 0;
+    padding-bottom: 30px;
     color: #ffd60a;
     font-weight: 500;
     letter-spacing: 1px;
@@ -201,9 +252,4 @@ dialog img {
 /* #favourites .card img {
     width: 200px;
     height: 300px;
-} */
-
-
-/* .card h3 {
-    max-width: 150px;
 } */

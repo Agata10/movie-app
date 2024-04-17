@@ -2,9 +2,9 @@ import {
   searchMovies,
   getTokenForSession,
   exchangeTokenForSessionId,
-} from "./Api.js";
-import { createCards } from "./Cards.js";
-import showMovieInfo, { showFavMovies } from "./MovieInfo.js";
+} from "./componentes/Api.js";
+import { createCards } from "./componentes/Cards.js";
+import showMovieInfo, { showFavMovies } from "./componentes/MovieInfo.js";
 
 const btn = document.getElementById("search-btn");
 const searchInput = document.getElementById("search");

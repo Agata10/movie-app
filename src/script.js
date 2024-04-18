@@ -39,6 +39,7 @@ async function onLoad() {
   const getToken = localStorage.getItem("token");
   if (!getToken) {
     token = await getTokenForSession();
+    window.open(`https://www.themoviedb.org/authenticate/${token}`);
   }
   const theMostTrend = await getTrendingMovies();
   console.log(theMostTrend.slice(5, 10));

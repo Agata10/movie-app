@@ -47,8 +47,6 @@ There are possibilities to expand app for more features like:
 
 1. Home page:
    <br>
-   <img src="./images/screen.png" width="800" height="500">
+   <img src="./src/assets/images/screen.png" width="1000" height="500">
 
 ## Site link
-
-https://agata10.github.io/SBA-316/

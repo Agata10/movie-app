@@ -108,6 +108,8 @@ const deleteFavMovie = async (movie_id) => {
       throw new Error(`Error with status code  ${response.status}`);
     }
     const data = await response.json();
+    document.getElementById("add-fav-btn").style.backgroundColor =
+      "rgb(255, 196, 0, 1)";
     return data;
   } catch (err) {
     console.error(err);
@@ -148,6 +150,8 @@ export const addToFavourite = async (movie_id) => {
         throw new Error(`Error with status code ${response.status}`);
       }
       const data = await response.json();
+      document.getElementById("add-fav-btn").style.backgroundColor =
+        "rgb(255, 196, 0, 0.7)";
       return data;
     }
   } catch (err) {

@@ -44,5 +44,14 @@ searchInput.addEventListener("keypress", function (event) {
 });
 
 btn.addEventListener("click", handleSearch);
-divWithCards.addEventListener("click", showMovieInfo);
-divWithFavs.addEventListener("click", showMovieInfo);
+divWithCards.addEventListener("click", async (e) => {
+  document.getElementById("add-fav-btn").style.backgroundColor =
+    "rgb(255, 196, 0, 1)";
+  await showMovieInfo(e);
+});
+
+divWithFavs.addEventListener("click", async (e) => {
+  document.getElementById("add-fav-btn").style.backgroundColor =
+    "rgb(255, 196, 0, 0.7)";
+  await showMovieInfo(e);
+});

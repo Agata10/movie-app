@@ -1,7 +1,5 @@
 # movie-app
 
-Skill based assessment for the Document Object Model
-
 ## Table of Contents
 
 - [About](#about)

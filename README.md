@@ -47,6 +47,6 @@ There are possibilities to expand app for more features like:
 
 1. Home page:
    <br>
-   <img src="./src/assets/images/screen.png" width="1000" height="500">
+   <img src="./src/assets/images/screen.png" width="1000" height="1000">
 
 ## Site link

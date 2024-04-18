@@ -1,5 +1,3 @@
-import { createCards } from "./Cards.js";
-import { showFavMovies } from "./MovieInfo.js";
 const API_KEY = "87e385fc6f59005274b365c73a2eac08";
 
 const options = {
@@ -230,6 +228,23 @@ export const getFavouritesMovies = async () => {
     }
     const favs = await response.json();
     return favs.results;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getTrendingMovies = async () => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1&region=usa`,
+      options
+    );
+    if (!response.ok) {
+      throw new Error(`Error with status code  ${response.status}`);
+    }
+    const movies = await response.json();
+    console.log(movies.results.slice(0, 10));
+    return movies.results.slice(0, 10);
   } catch (err) {
     console.error(err);
   }

@@ -172,9 +172,9 @@ export const getTokenForSession = async () => {
         throw new Error(`Error with status code  ${response.status}`);
       }
       const data = await response.json();
-      window.open(
-        `https://www.themoviedb.org/authenticate/${data.request_token}`
-      );
+      // window.open(
+      //   `https://www.themoviedb.org/authenticate/${data.request_token}`
+      // );
       localStorage.setItem("token", data.request_token);
       return data.request_token;
     } catch (err) {

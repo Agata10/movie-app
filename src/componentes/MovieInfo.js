@@ -6,6 +6,7 @@ import {
 import { createCards } from "./Cards.js";
 const img_URL = "https://image.tmdb.org/t/p/w500";
 let card;
+let clicked = false;
 const addFavBtn = document.getElementById("add-fav-btn");
 
 export const showFavMovies = async () => {
@@ -29,16 +30,19 @@ const showMovieInfo = async (e) => {
   const date = document.getElementById("date");
   const country = document.getElementById("country");
   const duration = document.getElementById("duration");
+  const closeBtn = document.getElementById("close");
   const img = dialog.querySelector("img");
 
   card = e.target.closest(".card");
-  const closeBtn = document.getElementById("close");
+
   if (card) {
     const info = await getInfoAboutMovie(card.id.slice(1));
+
     dialog.showModal();
 
+    console.log("opened");
     img.setAttribute("src", `${img_URL}${info.poster_path}`);
-    document.querySelector("main").style.filter = "blur(2px)";
+    document.querySelector("main").style.filter = "blur(5px)";
     title.textContent = info.title;
     ranking.textContent = Number(info.vote_average).toFixed(2);
     description.textContent = info.overview;
@@ -50,19 +54,21 @@ const showMovieInfo = async (e) => {
         genres.textContent += `${g}, `;
       }
     });
-    date.textContent = info.release_date;
+    date.textContent = `Release date: ${info.release_date}`;
     const hours = info.runtime / 60;
     const rhours = Math.floor(hours);
     const min = Math.round((hours - rhours) * 60);
-    duration.textContent = `${rhours}h ${min}min`;
+    duration.textContent = `Duration: ${rhours}h ${min}min`;
     const countries = info.production_countries.map((item) => item.name);
+    country.textContent = `Country: `;
     countries.forEach((c, index) => {
       if (index === countries.length - 1) {
-        country.textContent = `${c}`;
+        country.textContent += `${c}`;
       } else {
-        country.textContent = `${c}, `;
+        country.textContent += `${c}, `;
       }
     });
+
     closeBtn.addEventListener("click", () => {
       dialog.close();
       document.querySelector("main").style.filter = "blur(0px)";

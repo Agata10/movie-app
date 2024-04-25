@@ -48,3 +48,5 @@ There are possibilities to expand app for more features like:
    <img src="./src/assets/images/screen.png" width="1000" height="1000">
 
 ## Site link
+
+https://agata10.github.io/movie-app/

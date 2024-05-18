@@ -430,6 +430,34 @@ main section:last-child {
     font-family: var(--headers);
 }
 
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.prev-btn {
+    left: -50px; /* Adjust as needed */
+  }
+  
+  .next-btn {
+    right: -50px; /* Adjust as needed */
+  }
+  
+  .next-icon, .prev-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+
 /* FOOTER */
 
 footer {
@@ -444,3 +472,24 @@ footer {
     margin-top: 80px;
     border-top: 2px solid black;
 }
+
+@media (max-width: 768px) {
+    .carousel-item {
+        flex-direction: column;
+  
+      }
+    
+      .carousel-holder,
+      .carousel-holder-2 {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+    
+      .item-content {
+        flex: 1 0 auto;
+        width: 100%; /* Make each item full width on smaller screens */
+        margin: 5px 0; /* Adjust as needed for spacing */
+      }
+  
+  }

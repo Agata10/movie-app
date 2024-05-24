@@ -7,6 +7,7 @@
 - [Future app possibilities](#future-app-possibilities)
 - [Screenshots](#screenshots)
 - [Site link](#site-link)
+- [License](#license)
 
 ## About
 
@@ -50,3 +51,7 @@ There are possibilities to expand app for more features like:
 ## Site link
 
 https://agata10.github.io/movie-app/
+
+## License
+
+See the license : [LICENSE](LICENSE) 

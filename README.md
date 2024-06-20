@@ -29,6 +29,7 @@ The main tasks:
 
 - HTML
 - CSS
+- Bootstrap
 - JavaScript
 - LocalStorage
 - FETCH API
